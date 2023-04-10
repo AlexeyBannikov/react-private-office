@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import DevicesPage from './pages/DevicesPage/DevicesPage';
+import PrivateRoutes from './services/PrivateRoutes';
+import PrivateOfficePage from './pages/PrivateOfficePage/PrivateOfficePage';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+
+      <Route path='private-office' element={<PrivateRoutes />}>
+        <Route path='' element={<PrivateOfficePage />} />
+        <Route path='profile' element={<ProfilePage />} />
+        <Route path='devices' element={<DevicesPage />} />
+      </Route>
+
+      <Route path='*' element={<ErrorPage />} />
+    </Routes>
   );
-}
+};
 
 export default App;
